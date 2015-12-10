@@ -12,6 +12,7 @@ import LoadingIndicator from '../components/loadingIndicator';
 import {userDisplayName} from '../utils/formatters';
 import {valueIsEqual} from '../utils';
 import TooltipMixin from '../mixins/tooltip';
+import {t} from '../locale';
 
 const AssigneeSelector = React.createClass({
   propTypes: {
@@ -192,7 +193,7 @@ const AssigneeSelector = React.createClass({
               }>
               <MenuItem noAnchor={true} key="filter">
                 <input type="text" className="form-control input-sm"
-                       placeholder="Filter people" ref="filter"
+                       placeholder={t('Filter people')} ref="filter"
                        onKeyDown={this.onInputKeyDown}
                        onKeyUp={this.onFilterChange} />
               </MenuItem>
@@ -201,7 +202,7 @@ const AssigneeSelector = React.createClass({
                           className="clear-assignee"
                           disabled={!loading}
                           onSelect={this.clearAssignTo}>
-                  <span className="icon-circle-cross"/> Clear Assignee
+                  <span className="icon-circle-cross"/> {t('Clear Assignee')}
                 </MenuItem>
               : ''}
               {memberNodes}

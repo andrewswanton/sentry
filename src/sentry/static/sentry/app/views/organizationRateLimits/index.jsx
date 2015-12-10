@@ -5,7 +5,7 @@ import ApiMixin from '../../mixins/apiMixin';
 import IndicatorStore from '../../stores/indicatorStore';
 import OrganizationHomeContainer from '../../components/organizations/homeContainer';
 import OrganizationState from '../../mixins/organizationState';
-import {t} from '../../locale';
+import {t,tct} from '../../locale';
 
 const RangeInput = React.createClass({
   getDefaultProps() {
@@ -119,25 +119,29 @@ const RateLimitEditor = React.createClass({
 
     return (
       <form onSubmit={this.onSubmit}>
-        <p>Your organization is limited to <strong>{maxRate} events per minute</strong>.
-          When this rate is exceeded the system will begin discarding data until the
-          next interval.</p>
+          <p>
+            {tct('Your organization is limited to [strong:[maxRate] events per minute]. When this rate is exceeded the system will begin discarding data until the next interval.',
+              {
+                strong: <strong/>,
+                maxRate: maxRate
+              }
+            )}
+          </p>
 
-        <p>You may set a limit to the maximum amount a single project may send:</p>
+        <p>{t('You may set a limit to the maximum amount a single project may send:')}</p>
 
         <RangeInput
             defaultValue={savedProjectLimit}
             onChange={this.onProjectLimitChange}
             formatLabel={(value) => { return `${value}%`; }} />
 
-        <div className="help-block">The maximum percentage of your quota an
-          individual project can consume.</div>
+        <div className="help-block">{t('The maximum percentage of your quota an individual project can consume.')}</div>
 
         <div className="form-actions" style={{marginTop: 25}}>
           <button
             type="submit"
             className="btn btn-primary"
-            disabled={canSave}>Apply Changes</button>
+            disabled={canSave}>{t('Apply Changes')}</button>
         </div>
       </form>
     );
@@ -159,13 +163,13 @@ const OrganizationRateLimits = React.createClass({
       <OrganizationHomeContainer>
         <div className="box">
           <div className="box-header">
-            <h3>Rate Limits</h3>
+            <h3>{t('Rate Limits')}</h3>
           </div>
           <div className="box-content with-padding">
             {maxRate !== 0 ?
               <RateLimitEditor organization={org} />
             :
-              <p>There are no rate limits configured for your organization.</p>
+              <p>{t('There are no rate limits configured for your organization.')}</p>
             }
           </div>
         </div>

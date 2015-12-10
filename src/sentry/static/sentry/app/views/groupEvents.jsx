@@ -10,6 +10,8 @@ import LoadingError from '../components/loadingError';
 import LoadingIndicator from '../components/loadingIndicator';
 import Pagination from '../components/pagination';
 
+import {t} from '../locale';
+
 const GroupEvents = React.createClass({
   mixins: [
     ApiMixin,
@@ -132,7 +134,7 @@ const GroupEvents = React.createClass({
           <table className="table">
             <thead>
               <tr>
-                <th>ID</th>
+                <th>{t('ID')}</th>
                 {tagList.map((tag) => {
                   return (
                     <th key={tag.key}>
@@ -141,7 +143,7 @@ const GroupEvents = React.createClass({
                   );
                 })}
                 {hasUser &&
-                  <th>User</th>
+                  <th>{t('User')}</th>
                 }
               </tr>
             </thead>
